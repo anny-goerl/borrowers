@@ -4,7 +4,7 @@
       <th>Description</th>
       <th>Notes</th>
       <th>Borrowed since</th>
-      <th>State</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
       <tr>
         <td>{{description}}</td>
         <td>{{notes}}</td>
-        <td>{{createdAt}}</td>
+        <td>{{formatted-date createdAt 'LL'}}</td>
         <td>{{view Ember.Select content=states selection=state}}</td>
         <td>
           {{#if isSaving}}
@@ -24,3 +24,4 @@
     {{/each}}
   </tbody>
 </table>
+
