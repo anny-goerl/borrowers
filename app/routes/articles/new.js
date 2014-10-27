@@ -6,6 +6,19 @@ export default Ember.Route.extend({
       friend: this.modelFor('friends/show')
     });
   },
+  deactivate: function() {
+    // console.log("deactivate is called")
+    var model = this.modelFor('articles/new');
+
+    // If we are leaving the Route we verify if the model is in // 'isNew' state, which means it wasn't saved to the backend. //
+    if (model.get('isNew')) {
+
+      // We call DS#destroyRecord() which removes it from the store //
+      model.destroyRecord();
+
+    }
+
+  },
   actions: {
     save: function() {
       var _this = this,
