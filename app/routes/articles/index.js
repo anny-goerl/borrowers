@@ -21,10 +21,10 @@ export default Ember.Route.extend({
     }
 
     return articles.then(function(collection) {
-      if (!params.showReturned) {
-        return collection.filterBy('state', 'borrowed');
-      } else {
+      if (params.showReturned) {
         return collection;
+      } else {
+        return collection.filterBy('state', 'borrowed');
       }
     });
   },
