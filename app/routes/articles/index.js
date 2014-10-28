@@ -1,7 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
+  queryParams: {
+    showReturned: {
+      refreshModel: true
+    },
+  },
+  model: function(params) {
     var articles = this.modelFor('friends/show').get('articles');
 
     //
@@ -15,7 +20,17 @@ export default Ember.Route.extend({
       articles.reload();
     }
 
-    return articles;
+    return articles.then(function(collection) {
+      var result;
+
+      if (!params.showReturned) {
+        result = collection.filterBy('state', 'borrowed');
+      } else {
+        result = collection;
+      }
+
+      return result;
+    });
   },
   actions: {
     save: function(model) {
